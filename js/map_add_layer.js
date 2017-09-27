@@ -10,7 +10,7 @@ requirejs(["mapboxgl"], function(mapboxgl) {
         });
     }
 
-    if (map.loaded()) {
+    if (map._loaded) {
         run();
     } else {
         map.on("load", run);

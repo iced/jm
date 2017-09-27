@@ -8,7 +8,7 @@ requirejs(["mapboxgl"], function(mapboxgl) {
         zoom: {{zoom}},
         {{/zoom}}
         {{#center}}
-        center: {{center}},
+        center: {{center.value}},
         {{/center}}
     });
 

@@ -5,7 +5,7 @@ requirejs(["mapboxgl"], function(mapboxgl) {
         map.addSource("{{source_uuid}}", {{&data}})
     }
 
-    if (map.loaded()) {
+    if (map._loaded) {
         run();
     } else {
         map.on("load", run);
