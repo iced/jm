@@ -4,9 +4,9 @@ import os.path
 import jm
 
 class Map(object):
-    def __init__(self, style="mapbox://styles/mapbox/streets-v10", zoom=None, center=None):
+    def __init__(self, style="mapbox://styles/mapbox/streets-v10", width="auto", height=650, zoom=None, center=None):
         self.uuid = jm._uuid()
-        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style, "zoom": zoom, "center": {"value": center}}, show=False)
+        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style, "width": width, "height": height, "zoom": zoom, "center": {"value": center}}, show=False)
         self.shown = False
         self.operations = []
         self.sources = []

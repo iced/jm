@@ -1,4 +1,4 @@
-element.append("<div id=\"{{uuid}}\" style=\"width: auto; height: 650px; overflow: visible;\"></div>");
+element.append("<div id=\"{{uuid}}\" style=\"width: {{width}}; height: {{height}}px; overflow: visible;\"></div>");
 
 requirejs(["mapboxgl"], function(mapboxgl) {
     var map = new mapboxgl.Map({
