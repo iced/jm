@@ -31,7 +31,7 @@ class Map(object):
     def add_layer(self, layer):
         self.add_source(layer.source)
         if not layer.uuid in self.layers:
-            r = jm._run_js("map_add_layer", {"uuid": self.uuid, "layer_uuid": layer.uuid, "source_uuid": layer.source.uuid, "kind": layer.kind, "paint": layer.paint}, show=self.shown)
+            r = jm._run_js("map_add_layer", {"uuid": self.uuid, "layer_uuid": layer.uuid, "source_uuid": layer.source.uuid, "kind": layer.kind, "paint": layer.paint, "popup": layer.popup}, show=self.shown)
             if not self.shown:
                 self.operations.append(r)
             self.layers.append(layer.uuid)

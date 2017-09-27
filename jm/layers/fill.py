@@ -3,9 +3,10 @@ import json
 import jm
 
 class Fill(object):
-    def __init__(self, source):
+    def __init__(self, source, popup=None):
         self.uuid = jm._uuid()
         self.source = source
+        self.popup = popup
         self.kind = "fill"
         self.paint = json.dumps({
             "fill-color": {
