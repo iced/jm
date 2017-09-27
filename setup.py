@@ -10,6 +10,7 @@ setup(
     description="Jupyter Maps",
     url="https://github.com/iced/jm",
     packages=["jm", "jm.sources", "jm.layers"],
+    package_data = {"": ["js/*"]},
     install_requires=(
         "pystache"
     )

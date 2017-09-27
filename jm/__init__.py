@@ -9,7 +9,7 @@ import jm.sources
 import jm.layers
 
 def _run_js(js, bindings={}, debug=False, show=True):
-    js_fname = pkg_resources.resource_filename("jm", os.path.join("..", "js", "{0}.js".format(js)))
+    js_fname = pkg_resources.resource_filename("jm", os.path.join("js", "{0}.js".format(js)))
     with open(js_fname, "r") as f:
         content = f.read()
     content = pystache.render(content, bindings)
