@@ -3,7 +3,13 @@ element.append("<div id=\"{{uuid}}\" style=\"width: auto; height: 650px; overflo
 requirejs(["mapboxgl"], function(mapboxgl) {
     var map = new mapboxgl.Map({
         container: "{{uuid}}",
-        style: "{{style}}"
+        style: "{{style}}",
+        {{#zoom}}
+        zoom: {{zoom}},
+        {{/zoom}}
+        {{#center}}
+        center: {{center}},
+        {{/center}}
     });
 
     window.__jm_maps["{{uuid}}"] = map;

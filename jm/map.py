@@ -4,9 +4,9 @@ import os.path
 import jm
 
 class Map(object):
-    def __init__(self, style="mapbox://styles/mapbox/streets-v10"):
+    def __init__(self, style="mapbox://styles/mapbox/streets-v10", zoom=None, center=None):
         self.uuid = jm._uuid()
-        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style}, show=False)
+        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style, "zoom": zoom, "center": center}, show=False)
         self.sources = []
         self.sources_uuids = []
         self.layers = []
@@ -14,9 +14,9 @@ class Map(object):
 
     def _repr_javascript_(self, **kwargs):
         js_map = self.map._repr_javascript_(**kwargs)
-        js_sources = "\n".join(map(lambda s: s._repr_javascript_(**kwargs), self.sources))
-        js_layers = "\n".join(map(lambda s: s._repr_javascript_(**kwargs), self.layers))
-        return js_map + "\n" + js_sources + "\n" + js_layers;
+        js_sources = "".join(map(lambda s: s._repr_javascript_(**kwargs), self.sources))
+        js_layers = "".join(map(lambda s: s._repr_javascript_(**kwargs), self.layers))
+        return js_map + js_sources + js_layers
 
     def add_source(self, source):
         if not source.uuid in self.sources_uuids:
