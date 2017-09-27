@@ -8,7 +8,7 @@ from jm.map import Map
 import jm.sources
 import jm.layers
 
-def _run_js(js, bindings={}, debug=False, show=True):
+def _run_js(js, bindings={}, show=True, debug=False):
     js_fname = pkg_resources.resource_filename("jm", os.path.join("js", "{0}.js".format(js)))
     with open(js_fname, "r") as f:
         content = f.read()

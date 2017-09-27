@@ -21,17 +21,24 @@ class Map(object):
         self.operations = []
         return js_map + "\n" + js_operations
 
+    def __run_js(self, js, bindings={}):
+        r = jm._run_js(js, bindings, show=self.shown)
+        if not self.shown:
+            self.operations.append(r)
+
+    def remove(self):
+        self.__run_js("map_remove", {"uuid": self.uuid})
+
     def add_source(self, source):
         if not source.uuid in self.sources:
-            r = jm._run_js("map_add_source", {"uuid": self.uuid, "source_uuid": source.uuid, "data": source.data}, show=self.shown)
-            if not self.shown:
-                self.operations.append(r)
+            self.__run_js("map_add_source", {"uuid": self.uuid, "source_uuid": source.uuid, "data": source.data})
             self.sources.append(source.uuid)
 
     def add_layer(self, layer):
         self.add_source(layer.source)
         if not layer.uuid in self.layers:
-            r = jm._run_js("map_add_layer", {"uuid": self.uuid, "layer_uuid": layer.uuid, "source_uuid": layer.source.uuid, "kind": layer.kind, "paint": layer.paint, "popup": layer.popup}, show=self.shown)
-            if not self.shown:
-                self.operations.append(r)
+            self.__run_js("map_add_layer", {"uuid": self.uuid, "layer_uuid": layer.uuid, "source_uuid": layer.source.uuid, "kind": layer.kind, "paint": layer.paint, "popup": layer.popup})
             self.layers.append(layer.uuid)
+
+    def __del__(self):
+        self.remove()
