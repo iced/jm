@@ -6,7 +6,9 @@ import jm
 class Map(object):
     def __init__(self, style="mapbox://styles/mapbox/streets-v10", width="auto", height=650, zoom=None, center=None):
         self.uuid = jm._uuid()
-        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style, "width": width, "height": height, "zoom": zoom, "center": {"value": center}}, show=False)
+        if center is not None:
+            center = {"value": center}
+        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style, "width": width, "height": height, "zoom": zoom, "center": center}, show=False)
         self.shown = False
         self.operations = []
         self.sources = []
@@ -39,6 +41,9 @@ class Map(object):
         if not layer.uuid in self.layers:
             self.__run_js("map_add_layer", {"uuid": self.uuid, "layer_uuid": layer.uuid, "source_uuid": layer.source.uuid, "kind": layer.kind, "paint": layer.paint, "popup": layer.popup})
             self.layers.append(layer.uuid)
+
+    def fit_source(self, source, padding=0):
+        self.__run_js("map_fit_source", {"uuid": self.uuid, "source_uuid": source.uuid, "padding": padding})
 
     def __del__(self):
         self.remove()
