@@ -1,5 +1,5 @@
 * Jupyter Maps
-** Ratinale
+** Rationale
 *** What
 Wrapper over [[https://www.mapbox.com/mapbox-gl-js/api/][Mapbox GL JS]] which allows you to render maps in Jupyter notebooks. It does not aim to cover full Mapbox GL JS API (which is impossible anyway due to JS callbacks) but provides set of additional functionality and convenience methods.
 *** Why
