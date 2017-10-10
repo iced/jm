@@ -11,14 +11,17 @@ class Fill(object):
         self.paint = json.dumps({
             "fill-color": {
                 "type": "identity",
-                "property": "fill-color"
+                "property": "fill-color",
+                "default": "#FF0000"
             },
             "fill-outline-color": {
                 "type": "identity",
-                "property": "fill-outline-color"
+                "property": "fill-outline-color",
+                "default": "#000000"
             },
             "fill-opacity": {
                 "type": "identity",
-                "property": "fill-opacity"
+                "property": "fill-opacity",
+                "default": 0.5
             }
         })
