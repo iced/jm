@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="jm",
-    version="0.1.1",
+    version="0.1.2",
     author="Andrew Kirilenko",
     author_email="iced@gojuno.com",
     maintainer="Andrew Kirilenko",

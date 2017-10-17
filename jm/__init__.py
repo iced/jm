@@ -28,10 +28,10 @@ def init(acces_token, version="0.40.1"):
     _run_js("init", {"access_token": acces_token, "version": version})
     display(ipd.HTML("<link href=\"https://api.tiles.mapbox.com/mapbox-gl-js/v{0}/mapbox-gl.css\" rel=\"stylesheet\" />".format(version)))
 
-def gj(geojson, layer=jm.layers.Fill, popup=None, padding=0):
+def gj(geojson, layer=jm.layers.Fill, popup=None, padding=20, animate=0):
     m = jm.Map()
     s = jm.sources.GeoJSON(geojson)
     m.add_layer(layer(s, popup=popup))
-    m.fit_source(s, padding=padding)
+    m.fit_source(s, padding=padding, animate=animate)
     display(m)
     return m

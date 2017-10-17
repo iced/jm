@@ -10,6 +10,12 @@ requirejs(["mapboxgl"], function(mapboxgl) {
         {{#center}}
         center: {{center.value}},
         {{/center}}
+        {{#bearing}}
+        bearing: {{bearing}},
+        {{/bearing}}
+        {{#pitch}}
+        pitch: {{pitch}},
+        {{/pitch}}
     });
 
     window.__jm_maps["{{uuid}}"] = map;

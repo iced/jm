@@ -4,11 +4,11 @@ import os.path
 import jm
 
 class Map(object):
-    def __init__(self, style="mapbox://styles/mapbox/streets-v10", width="auto", height=650, zoom=None, center=None):
+    def __init__(self, style="mapbox://styles/mapbox/streets-v10", width="auto", height=650, zoom=None, center=None, bearing=None, pitch=None):
         self.uuid = jm._uuid()
         if center is not None:
             center = {"value": center}
-        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style, "width": width, "height": height, "zoom": zoom, "center": center}, show=False)
+        self.map = jm._run_js("map_init", {"uuid": self.uuid, "style": style, "width": width, "height": height, "zoom": zoom, "center": center, "bearing": bearing, "pitch": pitch}, show=False)
         self.shown = False
         self.operations = []
         self.sources = []
@@ -42,8 +42,25 @@ class Map(object):
             self.__run_js("map_add_layer", {"uuid": self.uuid, "layer_uuid": layer.uuid, "source_uuid": layer.source.uuid, "kind": layer.kind, "paint": layer.paint, "popup": layer.popup})
             self.layers.append(layer.uuid)
 
-    def fit_source(self, source, padding=0):
-        self.__run_js("map_fit_source", {"uuid": self.uuid, "source_uuid": source.uuid, "padding": padding})
+    def fit_source(self, source, padding=20, animate=0):
+        self.__run_js("map_fit_source", {"uuid": self.uuid, "source_uuid": source.uuid, "padding": padding, "animate": animate})
+
+    def set_camera(self, center=None, zoom=None, bearing=None, pitch=None, animate=0):
+        if center is not None:
+            center = {"value": center}
+        self.__run_js("map_set_camera", {"uuid": self.uuid, "center": center, "zoom": zoom, "bearing": bearing, "pitch": pitch, "animate": animate})
+
+    def set_ceneter(self, center, animate=0):
+        self.set_camera(center=center, animate=animate)
+
+    def set_zoom(self, zoom, animate=0):
+        self.set_camera(zoom=zoom, animate=animate)
+
+    def set_bearing(self, bearing, animate=0):
+        self.set_camera(bearing=bearing, animate=animate)
+
+    def set_pitch(self, pitch, animate=0):
+        self.set_camera(pitch=pitch, animate=animate)
 
     def __del__(self):
         self.remove()

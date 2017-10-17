@@ -25,7 +25,15 @@ requirejs(["mapboxgl"], function(mapboxgl) {
         });
 
         map.fitBounds(bounds, {
-            padding: {{padding}}
+            padding: {{padding}},
+            linear: true,
+            {{#animate}}
+            duration: {{animate}},
+            animate: true,
+            {{/animate}}
+            {{^animate}}
+            animate: false,
+            {{/animate}}
         });
     }
 
